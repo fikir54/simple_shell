@@ -4,31 +4,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <limits.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <errno.h>
 
-#define strtok_delim " \n\r\a\t"
+/**
+ * struct variables - Struct to save arguments
+ * @buffer: Argument
+ * @array_tokens: Array of tokens
+ *
+ * Description: Is a struct for save arguments send by users.
+ */
+typedef struct variables
+{
+	char *buffer;
+	char **array_tokens;
+} vars_t;
 
-extern char **environ;
-int str_to_array(char *cmd_line, int count, char **argv);
-int _exec(char **cmd_list, int i, char *cmd_line, int count, char **argv);
-void command_not_found(int i, char **cmd_list, int count, char **argv);
-int _strlen(char *s);
-char *_strncpy(char *dest, char *src, int n);
-char *_strdup(char *str);
-char *_path(char *command);
-char *directory(char *temporal_dir, char *command);
-char *_strcat(char *dest, char *src);
-char *_strdup(char *str);
-int _strcmp(char *s1, char *s2);
-char *_strcpy(char *dest, char *src);
-void *_calloc(unsigned int nmemb, unsigned int size);
-void a_exit(char **text, int i, char *cmd_line, int exit_status);
-void _env(void);
-void signal_handler(int signal);
+/**
+ * struct builtins - Struct for execute function from match
+ * @name: match
+ * @f: Function
+ *
+ * Description: Is a struct for execute a function from match
+ */
+typedef struct builtins
+{
+	char *name;
+	void (*f)(vars_t *);
+} builtins_t;
+
+void (*check_for_builtins(vars_t *vars))(vars_t *vars);
+char **tokenizer(char *buffer, char *delimiter);
+
+void file1(vars_t *vars);
+void file2(vars_t *vars);
+void exit_2(vars_t *vars);
+
 int _putchar(char c);
-void print_number(int n);
+int _puts(char *s);
+void print_env(vars_t *vars);
+void print_list(vars_t *vars);
+void free_shell(vars_t *vars);
 
 #endif
