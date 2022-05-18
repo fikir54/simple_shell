@@ -1,5 +1,10 @@
 # This file lists all individuals having contributed content to the repository.
 # For how it is generated, see `hack/generate-authors.sh`.
 
+<<<<<<< HEAD
 abient22 <yonaschali20@gmail.com>
 ftigistu <fikir.page@gmail.com>
+=======
+Fikiru Nigatu <fikir.page@gmail.com>
+Yonas Chali <yonaispeed@gmail.com>
+>>>>>>> 309c8b4766b19fe63ede2712e062d8edbee987ed
